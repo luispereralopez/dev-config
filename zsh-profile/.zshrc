@@ -163,6 +163,12 @@ alias dps="docker ps"
 alias dc_up="docker-compose up -d"
 alias dc_dpwn="docker-compose down"
 
+# GENERAL FUNCTIONS
+
+# get terminal colors
+print-colors() {
+  for i in {0..255}; do print -Pn "%K{$i}  %k%F{$i}${(l:3::0:)i}%f " ${${(M)$((i%6)):#3}:+$'\n'}; done
+}
 
 # KUBECTL FUNCTIONS
 
@@ -214,3 +220,4 @@ krabbitsecret() {
   [ -z "$2" ] && echo "Missing property parameter" && echo "Usage: krabbitsecret <service_name> <property>" && return -1
   kubectl get secret "$1"-ist-rabbitmq  -o yaml | grep "$2" | awk '{print $2}' | base64 --decode
 }
+
