@@ -21,6 +21,5 @@ echo "Successfully copied cmds folder on $timestamp" >> log.txt
 git add .
 git commit -m "$timestamp"
 git push
-echo "Successfully pushed code to github on $timestamp" >> log.txt
 
 cd -

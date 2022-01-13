@@ -22,3 +22,8 @@ Starting script on 2022-01-13 17:01:36
 Successfully copied .zshrc file on 2022-01-13 17:01:36
 Successfully copied .p10k.zsh file on 2022-01-13 17:01:36
 Successfully copied cmds folder on 2022-01-13 17:01:36
+Successfully pushed code to github on 2022-01-13 17:01:36
+Starting script on 2022-01-13 17:02:11
+Successfully copied .zshrc file on 2022-01-13 17:02:11
+Successfully copied .p10k.zsh file on 2022-01-13 17:02:11
+Successfully copied cmds folder on 2022-01-13 17:02:11
