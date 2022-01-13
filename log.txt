@@ -17,3 +17,4 @@ Successfully pushed code to github on 2022-01-13 13:57:22
 Starting script on 2022-01-13 16:26:02
 Successfully copied .zshrc file on 2022-01-13 16:26:02
 Successfully copied cmds folder on 2022-01-13 16:26:02
+Successfully pushed code to github on 2022-01-13 16:26:02

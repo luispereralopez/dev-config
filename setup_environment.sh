@@ -35,9 +35,10 @@ install_required() {
     # install Node
     brew install node
 
-    # install Azul Zule JDK 11
-    brew tap AdoptOpenJDK/openjdk
+    # install Java Azul Zulu JDK 11
+    brew install --cask zulu11
 
+    # install Java Adopt Open JDK 8
     brew install --cask adoptopenjdk/openjdk/adoptopenjdk8
 
     # install ItelliJ IDEA (note: need to request software license)
