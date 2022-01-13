@@ -1,0 +1,27 @@
+# SH INTO A POD
+kubectl exec -it <POD_NAME>  -- /bin/sh
+
+# SH INTO A POD WITH MULTIPLE CONTAINERS
+kubectl exec -it <POD_NAME> -c <CONTAINER_NAME> -- /bin/sh
+
+# CHECK REPLAY STATUS
+kubectl exec <POD_NAME> -- wget -q -O - --no-check-certificate --method GET  --timeout=0 'http://localhost:8080/replay/status' | jq
+
+# TRIGGER REPLAY
+kubectl exec <POD_NAME> -- wget -q -O - --no-check-certificate --method POST  --timeout=0 'http://localhost:8080/replay' | jq
+
+# KUBECTL PORT FORWARD
+kubectl port-forward deploy/<DEPLYMENT_NAME> 8090:8080
+
+# GET MONGODB SECRET
+# for GCP, `pri` substring should be removed from the connection string returned
+kubectl get secret <SERVICE_NAME>-ist-mongodb  -o yaml | grep uri | awk '{print $2}' | base64 --decode
+
+
+# GET RABBIT SECRET URI
+kubectl get secret <SERVICE_NAME>-ist-rabbitmq  -o yaml | grep uri | awk '{print $2}' | base64 --decode
+
+# GET RABBIT SECRET USERNAME
+kubectl get secret <SERVICE_NAME>-ist-rabbitmq  -o yaml | grep username | awk '{print $2}' | base64 --decode
+
+# MISSING
