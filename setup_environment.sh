@@ -1,4 +1,22 @@
-if read -q "choice?Do you want to install required software (y/n): "; then
+#!/bin/bash
+while true; do
+    read -p "Do you want to install required software (y/n) " yn
+    case $yn in
+        [Yy]* ) echo "Installing required software..." 
+                echo "Installing optional software..." 
+                break;;
+        [Nn]* ) exit;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
+
+
+
+install_required() {
+    #####
+    # Required Installations
+    #####
+
     # install Homebrew
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
@@ -33,7 +51,9 @@ if read -q "choice?Do you want to install required software (y/n): "; then
 
     # install Yeoman for code generation
     npm install -g yo
+}
 
+install_optional() {
     #####
     # Optional Installations
     #####
@@ -49,6 +69,4 @@ if read -q "choice?Do you want to install required software (y/n): "; then
 
     #install VSCode
     brew install --cask visual-studio-code
-else
-    echo "true"
-fi
+}
