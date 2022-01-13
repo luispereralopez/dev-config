@@ -11,6 +11,9 @@ echo "Starting script on $timestamp" >> log.txt
 cp ~/.zshrc /Users/luisp/ist/projects/dev-config/zsh-profile/.zshrc
 echo "Successfully copied .zshrc file on $timestamp" >> log.txt
 
+cp ~/.p10k.zsh /Users/luisp/ist/projects/dev-config/zsh-profile/.p10k.zsh
+echo "Successfully copied .p10k.zsh file on $timestamp" >> log.txt
+
 cp -R ~/ist/cmds /Users/luisp/ist/projects/dev-config/
 echo "Successfully copied cmds folder on $timestamp" >> log.txt
 
