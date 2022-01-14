@@ -7,7 +7,7 @@ ITERM2_INSTALLED=
 
 ############################### FUNCTIONS ###############################
 
-# prompts a yes/no question to install software
+# Function that prompts a yes/no question to execute a command
 # $1 -> name of the software to install
 # $2 -> command to execute to install the software
 yes_no_question() {
@@ -24,7 +24,7 @@ yes_no_question() {
     done
 }
 
-# check https://docs.ulti.io/systems/quark/getting-started/install-cli/ for installation instructions
+# Function to install quark-cli. Check https://docs.ulti.io/systems/quark/getting-started/install-cli/ for installation instructions
 install_quark_cli () {
     curl -L -o /tmp/qrk-v3.0.20.pkg https://artifactory.mia.ulti.io/artifactory/gt-generic-prod/quark-cli/installers/macos/qrk-v3.0.20.pkg
     echo "Termial needs permission to install package 'qrk-v3.0.20.pkg', please enter user password:"
@@ -85,7 +85,7 @@ install_required() {
     sh -c "$(https://ultigit.ultimatesoftware.com/projects/STRAT/repos/stratcli/raw/hack/install.sh?at=refs%2Fheads%2Fmaster)"
 }
 
-# install zsh plugin
+# function to install zsh plugin
 # $1 -> git repo url of the plugin to install
 # $2 -> plugin name
 install_zsh_plugin() {
@@ -124,7 +124,7 @@ install_optional_zsh_plugins() {
         yes_no_question "fzf-tab-completion plugin" "install_fzf_tab_completion"
 
         if [ -z "${ITERM2_INSTALLED}" ]; then
-            echo "iTerm2 was not installed, skipping powerlevel10k plugin"
+            echo "iTerm2 was not installed, skipping powerlevel10k theme installation"
         else
             echo "iTerm2 was installed"
             yes_no_question "powerlevel10k theme" "git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
@@ -133,6 +133,7 @@ install_optional_zsh_plugins() {
         fi
     fi
 }
+
 install_optional() {
     #####
     # Optional Installations
@@ -197,21 +198,3 @@ print_required_software() {
 print_required_software
 yes_no_question "the above metioned software" "install_required"
 install_optional
-install_optional_zsh_plugins
-
-# test() {
-#     return_value="Test1"
-#     echo $return_value
-#     yes_no_question "Testing return value" "git status"
-#     OH_MY_ZSH_INSTALLED=$return_value
-#     echo "Printing return value"
-#     echo $return_value
-# }
-
-# yes_no_question "zsh-autosuggestions" "install_zsh_plugin https://github.com/zsh-users/zsh-autosuggestions zsh-autosuggestions"
-
-# test
-# echo "Printing INSTALLED"
-# echo $OH_MY_ZSH_INSTALLED
-# install_zsh_plugins
-# install_fzf_tab_completion
