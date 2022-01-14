@@ -221,3 +221,5 @@ krabbitsecret() {
   kubectl get secret "$1"-ist-rabbitmq  -o yaml | grep "$2" | awk '{print $2}' | base64 --decode
 }
 
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source ~/.oh-my-zsh/custom/plugins/fzf-tab-completion/zsh/fzf-zsh-completion.sh

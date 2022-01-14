@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 ############################### VARIABLES ###############################
 
@@ -85,6 +85,54 @@ install_required() {
     sh -c "$(https://ultigit.ultimatesoftware.com/projects/STRAT/repos/stratcli/raw/hack/install.sh?at=refs%2Fheads%2Fmaster)"
 }
 
+# install zsh plugin
+# $1 -> git repo url of the plugin to install
+# $2 -> plugin name
+install_zsh_plugin() {
+    git clone $1 ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/$2
+    echo "source ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/$2/$2.zsh" >> ${ZDOTDIR:-$HOME}/.zshrc
+    source ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/$2/$2.zsh
+}
+
+install_fzf_tab_completion() {
+    echo "Installing fzf dependecy for fzf-tab-completion..."
+    brew install fzf
+    $(brew --prefix)/opt/fzf/install
+
+    echo "Installing gawk dependecy for fzf-tab-completion..."
+    brew install gawk
+
+    echo "Installing fzf-tab-completion..."
+    git clone https://github.com/lincheney/fzf-tab-completion ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-tab-completion
+    echo "source ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-tab-completion/zsh/fzf-zsh-completion.sh" >> ${ZDOTDIR:-$HOME}/.zshrc
+    source ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-tab-completion/zsh/fzf-zsh-completion.sh
+}
+
+install_optional_zsh_plugins() {
+    if [ -z "${OH_MY_ZSH_INSTALLED}" ]; then
+        echo "Oh My Zsh was not installed, skipping plugin installation"
+    else
+        echo "Oh My Zsh was installed"
+
+        # install plugin zsh-syntax-highlighting (https://github.com/zsh-users/zsh-syntax-highlighting)
+        yes_no_question "zsh-syntax-highlighting plugin" "install_zsh_plugin https://github.com/zsh-users/zsh-syntax-highlighting.git zsh-syntax-highlighting"
+
+        # install plugin zsh-syntax-highlighting (https://github.com/zsh-users/zsh-autosuggestions)
+        yes_no_question "zsh-autosuggestions plugin" "install_zsh_plugin https://github.com/zsh-users/zsh-autosuggestions zsh-autosuggestions"
+
+        # install https://github.com/lincheney/fzf-tab-completion (https://github.com/lincheney/fzf-tab-completion)
+        yes_no_question "fzf-tab-completion plugin" "install_fzf_tab_completion"
+
+        if [ -z "${ITERM2_INSTALLED}" ]; then
+            echo "iTerm2 was not installed, skipping powerlevel10k plugin"
+        else
+            echo "iTerm2 was installed"
+            yes_no_question "powerlevel10k theme" "git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
+            echo $fg_bold[yellow] "##### <<< WARNING, PLEASE READ BELOW! >>> #####"
+            echo "To enable powerlevel10k theme, please set ZSH_THEME=\"powerlevel10k/powerlevel10k\" in ~/.zshrc and open a new terminal window"
+        fi
+    fi
+}
 install_optional() {
     #####
     # Optional Installations
@@ -121,29 +169,9 @@ install_optional() {
     # install Oh My Zsh (https://ohmyz.sh)
     yes_no_question "Oh My Zsh (shell)" "sh -c '$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)'"
     OH_MY_ZSH_INSTALLED=$return_value
-}
 
-# install zsh plugin
-# $1 -> git repo url of the plugin to install
-# $2 -> plugin name
-install_zsh_plugin() {
-    git clone $1 ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/$2
-    echo "source ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/$2/$2.zsh" >> ${ZDOTDIR:-$HOME}/.zshrc
-    source ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/$2/$2.zsh
-}
-
-install_optional_zsh_plugins() {
-    if [-z OH_MY_ZSH_INSTALLED]; then
-        echo "Oh My Zsh was not installed, skipping plugin installation"
-    else
-        echo "Oh My Zsh was installed"
-
-        # install plugin zsh-syntax-highlighting (https://github.com/zsh-users/zsh-syntax-highlighting)
-        yes_no_question "zsh-syntax-highlighting" "install_zsh_plugin https://github.com/zsh-users/zsh-syntax-highlighting.git zsh-syntax-highlighting"
-
-        # install plugin zsh-syntax-highlighting (https://github.com/zsh-users/zsh-autosuggestions)
-        yes_no_question "zsh-autosuggestions" "install_zsh_plugin https://github.com/zsh-users/zsh-autosuggestions zsh-autosuggestions"
-    fi
+    # install terminal plugins
+    install_optional_zsh_plugins
 }
 
 print_required_software() {
@@ -166,21 +194,19 @@ print_required_software() {
 
 ############################### MAIN ###############################
 
-# print_required_software
-# yes_no_question "the above metioned software" "install_required"
-# install_optional
-# install_zsh_plugins
+print_required_software
+yes_no_question "the above metioned software" "install_required"
+install_optional
+install_optional_zsh_plugins
 
-test() {
-    return_value="Test1"
-    echo $return_value
-    # yes_no_question "Testing return value" "git status"
-    # OH_MY_ZSH_INSTALLED=$return_value
-    # echo "Printing return value"
-    # echo $return_value
-}
-
-
+# test() {
+#     return_value="Test1"
+#     echo $return_value
+#     yes_no_question "Testing return value" "git status"
+#     OH_MY_ZSH_INSTALLED=$return_value
+#     echo "Printing return value"
+#     echo $return_value
+# }
 
 # yes_no_question "zsh-autosuggestions" "install_zsh_plugin https://github.com/zsh-users/zsh-autosuggestions zsh-autosuggestions"
 
@@ -188,3 +214,4 @@ test() {
 # echo "Printing INSTALLED"
 # echo $OH_MY_ZSH_INSTALLED
 # install_zsh_plugins
+# install_fzf_tab_completion
