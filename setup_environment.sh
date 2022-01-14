@@ -1,5 +1,10 @@
 #!/bin/bash
 
+############################### VARIABLES ###############################
+
+OH_MY_ZSH_INSTALLED=
+ITERM2_INSTALLED=
+
 ############################### FUNCTIONS ###############################
 
 # prompts a yes/no question to install software
@@ -11,8 +16,9 @@ yes_no_question() {
         case $yn in
             [Yy]* ) echo "Installing $1..."
                     $2
+                    return_value="y"
                     break;;
-            [Nn]* ) break;;
+            [Nn]* ) return_value=""; break;;
             * ) echo "Please answer yes or no.";;
         esac
     done
@@ -84,9 +90,6 @@ install_optional() {
     # Optional Installations
     #####
 
-    # install iTerm2
-    yes_no_question "iTerm2" "brew install --cask iterm2"
-
     # install Robo 3T
     yes_no_question "Robo 3T" "brew install --cask robo-3t"
 
@@ -108,8 +111,39 @@ install_optional() {
     # install Keeper Password Manager
     yes_no_question "Keeper Password Manager" "brew install --cask keeper-password-manager"
 
-    # install Oh My Zsh
+    # install Jabba (https://github.com/shyiko/jabba)   
+    yes_no_question "Jabba" "brew install jabba"
+
+    # install iTerm2
+    yes_no_question "iTerm2" "brew install --cask iterm2"
+    ITERM2_INSTALLED=$return_value
+
+    # install Oh My Zsh (https://ohmyz.sh)
     yes_no_question "Oh My Zsh (shell)" "sh -c '$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)'"
+    OH_MY_ZSH_INSTALLED=$return_value
+}
+
+# install zsh plugin
+# $1 -> git repo url of the plugin to install
+# $2 -> plugin name
+install_zsh_plugin() {
+    git clone $1 ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/$2
+    echo "source ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/$2/$2.zsh" >> ${ZDOTDIR:-$HOME}/.zshrc
+    source ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/$2/$2.zsh
+}
+
+install_optional_zsh_plugins() {
+    if [-z OH_MY_ZSH_INSTALLED]; then
+        echo "Oh My Zsh was not installed, skipping plugin installation"
+    else
+        echo "Oh My Zsh was installed"
+
+        # install plugin zsh-syntax-highlighting (https://github.com/zsh-users/zsh-syntax-highlighting)
+        yes_no_question "zsh-syntax-highlighting" "install_zsh_plugin https://github.com/zsh-users/zsh-syntax-highlighting.git zsh-syntax-highlighting"
+
+        # install plugin zsh-syntax-highlighting (https://github.com/zsh-users/zsh-autosuggestions)
+        yes_no_question "zsh-autosuggestions" "install_zsh_plugin https://github.com/zsh-users/zsh-autosuggestions zsh-autosuggestions"
+    fi
 }
 
 print_required_software() {
@@ -135,3 +169,22 @@ print_required_software() {
 # print_required_software
 # yes_no_question "the above metioned software" "install_required"
 # install_optional
+# install_zsh_plugins
+
+test() {
+    return_value="Test1"
+    echo $return_value
+    # yes_no_question "Testing return value" "git status"
+    # OH_MY_ZSH_INSTALLED=$return_value
+    # echo "Printing return value"
+    # echo $return_value
+}
+
+
+
+# yes_no_question "zsh-autosuggestions" "install_zsh_plugin https://github.com/zsh-users/zsh-autosuggestions zsh-autosuggestions"
+
+# test
+# echo "Printing INSTALLED"
+# echo $OH_MY_ZSH_INSTALLED
+# install_zsh_plugins
