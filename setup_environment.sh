@@ -117,10 +117,10 @@ install_optional_zsh_plugins() {
         # install plugin zsh-syntax-highlighting (https://github.com/zsh-users/zsh-syntax-highlighting)
         yes_no_question "zsh-syntax-highlighting plugin" "install_zsh_plugin https://github.com/zsh-users/zsh-syntax-highlighting.git zsh-syntax-highlighting"
 
-        # install plugin zsh-syntax-highlighting (https://github.com/zsh-users/zsh-autosuggestions)
+        # install plugin zsh-autosuggestions (https://github.com/zsh-users/zsh-autosuggestions)
         yes_no_question "zsh-autosuggestions plugin" "install_zsh_plugin https://github.com/zsh-users/zsh-autosuggestions zsh-autosuggestions"
 
-        # install https://github.com/lincheney/fzf-tab-completion (https://github.com/lincheney/fzf-tab-completion)
+        # install plugin fzf-tab-completion (https://github.com/lincheney/fzf-tab-completion)
         yes_no_question "fzf-tab-completion plugin" "install_fzf_tab_completion"
 
         if [ -z "${ITERM2_INSTALLED}" ]; then
@@ -134,6 +134,16 @@ install_optional_zsh_plugins() {
     fi
 }
 
+install_nvm() {
+    brew install nvm
+    echo "# NVM configuration. You can set $NVM_DIR to any location, but leaving it unchanged from
+# /usr/local/opt/nvm will destroy any nvm-installed Node installations
+# upon upgrade/reinstall
+export NVM_DIR=\"$HOME/.nvm\"
+[ -s \"/usr/local/opt/nvm/nvm.sh\" ] && \. \"/usr/local/opt/nvm/nvm.sh\"  # This loads nvm\n
+[ -s \"/usr/local/opt/nvm/etc/bash_completion.d/nvm\" ] && \. \"/usr/local/opt/nvm/etc/bash_completion.d/nvm\"  # This loads nvm bash_completion" >> ${ZDOTDIR:-$HOME}/.zshrc
+}
+
 install_optional() {
     #####
     # Optional Installations
@@ -142,14 +152,14 @@ install_optional() {
     # install Robo 3T
     yes_no_question "Robo 3T" "brew install --cask robo-3t"
 
-    #install Postman
+    # install Postman
     yes_no_question "Postman" "brew install --cask postman"
 
-    #install VSCode
+    # install VSCode
     yes_no_question "Visual Studio Code" "brew install --cask visual-studio-code"
 
     # install Node Version Manager
-    yes_no_question "Node Version Manager (nvm)" "brew install nvm"
+    yes_no_question "Node Version Manager (nvm)" "install_nvm"
 
     # install Google Chrome
     yes_no_question "Google Chrome" "brew install --cask google-chrome"
@@ -163,7 +173,7 @@ install_optional() {
     # install Jabba (https://github.com/shyiko/jabba)   
     yes_no_question "Jabba" "brew install jabba"
 
-    # install iTerm2
+    # install iTerm2 (https://iterm2.com)
     yes_no_question "iTerm2" "brew install --cask iterm2"
     ITERM2_INSTALLED=$return_value
 
@@ -195,6 +205,11 @@ print_required_software() {
 
 ############################### MAIN ###############################
 
+# print required dependencies that will be installed
 print_required_software
+
+# confirm option to install required dependencies
 yes_no_question "the above metioned software" "install_required"
+
+# install optional dependencies
 install_optional

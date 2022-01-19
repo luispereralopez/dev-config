@@ -23,8 +23,8 @@ export ZPLUG_HOME=/usr/local/opt/zplug
 source $ZPLUG_HOME/init.zsh
 
 # enhancd configuration
-ENHANCD_FILTER=fzy
-export ENHANCD_FILTER
+# ENHANCD_FILTER=fzy
+# export ENHANCD_FILTER
 
 # JAVA
 export JAVA_HOME=$(/usr/libexec/java_home)
@@ -222,4 +222,6 @@ krabbitsecret() {
 }
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-source ~/.oh-my-zsh/custom/plugins/fzf-tab-completion/zsh/fzf-zsh-completion.sh
+# source ~/.oh-my-zsh/custom/plugins/fzf-tab-completion/zsh/fzf-zsh-completion.sh
+source $HOME/.rvm/scripts/rvm
+export PATH="/usr/local/sbin:$PATH"
