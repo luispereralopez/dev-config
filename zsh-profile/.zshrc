@@ -221,7 +221,11 @@ krabbitsecret() {
   kubectl get secret "$1"-ist-rabbitmq  -o yaml | grep "$2" | awk '{print $2}' | base64 --decode
 }
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+#######
+
+# commented because it was running slow
 # source ~/.oh-my-zsh/custom/plugins/fzf-tab-completion/zsh/fzf-zsh-completion.sh
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 source $HOME/.rvm/scripts/rvm
 export PATH="/usr/local/sbin:$PATH"
