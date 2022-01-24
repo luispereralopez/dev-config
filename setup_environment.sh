@@ -1,9 +1,11 @@
-#!/bin/zsh
+#!/bin/bash
 
 ############################### VARIABLES ###############################
 
 OH_MY_ZSH_INSTALLED=
 ITERM2_INSTALLED=
+
+YELLOW_FONT_COLOR='\033[1;33m'
 
 ############################### FUNCTIONS ###############################
 
@@ -128,7 +130,7 @@ install_optional_zsh_plugins() {
         else
             echo "iTerm2 was installed"
             yes_no_question "powerlevel10k theme" "git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
-            echo $fg_bold[yellow] "##### <<< WARNING, PLEASE READ BELOW! >>> #####"
+            echo -e "${YELLOW_FONT_COLOR}##### <<< WARNING, PLEASE READ BELOW! >>> #####"
             echo "To enable powerlevel10k theme, please set ZSH_THEME=\"powerlevel10k/powerlevel10k\" in ~/.zshrc and open a new terminal window"
         fi
     fi
