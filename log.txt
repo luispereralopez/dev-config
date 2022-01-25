@@ -103,3 +103,7 @@ Starting script on 2022-01-25 15:59:27
 Successfully copied .zshrc file on 2022-01-25 15:59:27
 Successfully copied .p10k.zsh file on 2022-01-25 15:59:27
 Successfully copied cmds folder on 2022-01-25 15:59:27
+Starting script on 2022-01-25 16:59:29
+Successfully copied .zshrc file on 2022-01-25 16:59:29
+Successfully copied .p10k.zsh file on 2022-01-25 16:59:29
+Successfully copied cmds folder on 2022-01-25 16:59:29
