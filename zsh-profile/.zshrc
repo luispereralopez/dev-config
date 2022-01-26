@@ -148,7 +148,7 @@ alias branch="git checkout -b "
 alias master="git checkout master"
 alias log="git log --oneline --decorate --graph"
 alias glog="git log"
-alias gpush="git push -u origin $(git_current_branch)"
+alias gpush='git push -u origin $(git_current_branch)'
 alias fpush="git push -f"
 alias diff="git diff master"
 
