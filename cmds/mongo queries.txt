@@ -1,0 +1,175 @@
+var runIds = [
+{
+    "runId" : JUUID("311cda0e-fbc8-43da-83de-d422d83ffc0d")
+},
+{
+    "runId" : JUUID("1c815af2-d696-46ed-bcd5-5dcb965ff504")
+},
+{
+    "runId" : JUUID("0310084f-0bed-433c-bc25-1943656456fa")
+},
+{
+    "runId" : JUUID("57d53e29-2665-4f7b-a033-3de1e4b746de")
+},
+{
+    "runId" : JUUID("bbf6cf75-9b57-4bb7-9196-216d5fdf7e63")
+},
+{
+    "runId" : JUUID("ec3f4e79-772b-4756-977d-94b5323adfc7")
+},
+{
+    "runId" : JUUID("489adaad-1449-40e1-be07-ca018f060c56")
+},
+{
+    "runId" : JUUID("f0795f91-be61-4d60-85a4-99ecbab812cb")
+},
+{
+    "runId" : JUUID("e95fb103-704b-4490-a364-60e5629073f3")
+},
+{
+    "runId" : JUUID("8406f231-1e87-4ef3-80f6-594a3faedafb")
+},
+{
+    "runId" : JUUID("8ac88e23-38a4-4ef4-8842-97e3684fbd6a")
+},
+{
+    "runId" : JUUID("c9e11345-01e4-4cdc-a03f-04871f4724a4")
+},
+{
+    "runId" : JUUID("d2633f39-f92b-43a3-a526-f891e8dd555f")
+},
+{
+    "runId" : JUUID("04c2e0b8-b1ce-4b9b-b270-5abb27f9131b")
+},
+{
+    "runId" : JUUID("b6b3dbe2-7d4b-4749-b7da-db51f9d736c3")
+},
+{
+    "runId" : JUUID("39de5fc4-5183-401c-b1f4-2c02bbada19c")
+},
+{
+    "runId" : JUUID("15cb9d4a-5f54-4314-926a-ce58eef85bab")
+},
+{
+    "runId" : JUUID("b8296a03-90d2-4bdc-9660-5ca81c89b053")
+},
+{
+    "runId" : JUUID("5587311c-796b-4581-b85f-7b0c469567fe")
+},
+{
+    "runId" : JUUID("d6d6308c-d0a6-432e-b02a-5e62a90902f9")
+},
+{
+    "runId" : JUUID("f6c29b1c-10f8-46e8-acb5-2b8a3aa8163d")
+},
+{
+    "runId" : JUUID("836a5ee5-3199-4b00-b66b-3a3093bd4923")
+},
+{
+    "runId" : JUUID("7b183ca3-2eab-4d36-948e-54c2688c6dce")
+},
+{
+    "runId" : JUUID("db668d45-45b6-4651-8aa4-fd36a6969477")
+},
+{
+    "runId" : JUUID("02fc1f97-2138-45a7-94d2-03e9a5e4cc87")
+},
+{
+    "runId" : JUUID("43394f67-f923-4e41-9422-cd15dddab8e0")
+},
+{
+    "runId" : JUUID("2c02fd44-2e84-4d1f-803c-92dde84c3dc3")
+},
+{
+    "runId" : JUUID("1725f917-21e7-41a2-82cc-e87d194d70cc")
+},
+{
+    "runId" : JUUID("9c2db7e5-c043-4035-ba49-f18433bb6749")
+},
+{
+    "runId" : JUUID("936a741e-0c09-44eb-8b5e-f772c482b13d")
+},
+{
+    "runId" : JUUID("c227bd1f-2dcb-41c1-8a3c-98d2eba34986")
+},
+{
+    "runId" : JUUID("94a84be8-da1d-4d64-b402-26cfb9df9f50")
+},
+{
+    "runId" : JUUID("c27ed649-5bdc-4176-a125-afd364419b6d")
+},
+{
+    "runId" : JUUID("76ae742b-493e-4020-8eab-99f6486ed01c")
+},
+{
+    "runId" : JUUID("6e23a1a9-c547-4888-94ff-17b36f82f95a")
+},
+{
+    "runId" : JUUID("e2202b39-d5b8-4766-99b0-d465322cf1cc")
+},
+{
+    "runId" : JUUID("2f48dbea-1b90-48c1-8ad7-d186ff194b54")
+},
+{
+    "runId" : JUUID("855e2738-4aae-4553-904c-c4bd23ccb5a2")
+},
+{
+    "runId" : JUUID("b65491c9-6132-40ca-8873-51228d4db1af")
+},
+{
+    "runId" : JUUID("471a4fc9-4f0a-4e00-ad8d-c7e59d2be8aa")
+},
+{
+    "runId" : JUUID("b564c9a0-698a-42ad-bb14-e38115f0eac2")
+},
+{
+    "runId" : JUUID("4ff22e3e-bf04-4614-9956-0c2e82913539")
+},
+{
+    "runId" : JUUID("6075638f-e0a2-48d5-8843-c94d493237da")
+},
+{
+    "runId" : JUUID("705734a7-ba8a-4e4b-9530-97549b4a937a")
+},
+{
+    "runId" : JUUID("3717620a-516d-49e1-a395-ff718eda838d")
+},
+{
+    "runId" : JUUID("c8391fd7-27fe-45ce-8411-260301d2c56c")
+},
+{
+    "runId" : JUUID("2d9aed81-5d50-44fb-9b0e-d78ca6163836")
+},
+{
+    "runId" : JUUID("3ff7ff61-ee9e-4e3e-80d2-b5ee05e25cbf")
+},
+{
+    "runId" : JUUID("6e2f36b1-510f-4b91-98e0-2c0888c93fb2")
+},
+{
+    "runId" : JUUID("f8a8a73b-3178-4cfd-bfc7-c5c5c3fdad2f")
+}
+]
+
+BinData.prototype.toJUUID = function () {
+    var hex = Base64ToHex(this.base64()); // don't use BinData's hex function because it has bugs in older versions of the shell
+    var msb = hex.substr(0, 16);
+    var lsb = hex.substr(16, 16);
+    msb = msb.substr(14, 2) + msb.substr(12, 2) + msb.substr(10, 2) + msb.substr(8, 2) + msb.substr(6, 2) + msb.substr(4, 2) + msb.substr(2, 2) + msb.substr(0, 2);
+    lsb = lsb.substr(14, 2) + lsb.substr(12, 2) + lsb.substr(10, 2) + lsb.substr(8, 2) + lsb.substr(6, 2) + lsb.substr(4, 2) + lsb.substr(2, 2) + lsb.substr(0, 2);
+    hex = msb + lsb;
+    var uuid = hex.substr(0, 8) + '-' + hex.substr(8, 4) + '-' + hex.substr(12, 4) + '-' + hex.substr(16, 4) + '-' + hex.substr(20, 12);
+    return 'JUUID("' + uuid + '")';
+}
+
+for(var i=0; i<runIds.length; i++) {
+	db.getCollection('integration-runs').aggregate([
+	  { $match: {"runId": {$eq: runIds[i].runId}} },
+	  { $unwind: "$statusMessages"},
+	  { $project: {"statusMessages": 1, "runId": 1, _id: 0} },
+	  { $addFields: {"status": "$statusMessages.statusType"} },
+	  { $project: {"status": 1, "runId": 1} }
+	]).forEach(function(x) { 
+        print(x.status + ": " + x.runId.toJUUID()); 
+    });
+}
