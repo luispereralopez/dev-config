@@ -173,3 +173,17 @@ for(var i=0; i<runIds.length; i++) {
         print(x.status + ": " + x.runId.toJUUID()); 
     });
 }
+
+
+
+######################################################################################################################
+######################################################################################################################
+
+
+db.getCollection('integration-runs').aggregate([
+  { $match: {"runId": {$eq: JUUID("d6d6308c-d0a6-432e-b02a-5e62a90902f9")}} },
+  { $unwind: "$statusMessages"},
+  { $project: {"statusMessages": 1, _id: 0} },
+  { $addFields: {"status": "$statusMessages.statusType"} },
+  { $project: {"status": 1} }
+])
