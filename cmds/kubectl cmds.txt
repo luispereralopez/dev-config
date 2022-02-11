@@ -10,6 +10,9 @@ kubectl exec <POD_NAME> -- wget -q -O - --no-check-certificate --method GET  --t
 # TRIGGER REPLAY
 kubectl exec <POD_NAME> -- wget -q -O - --no-check-certificate --method POST  --timeout=0 'http://localhost:8080/replay' | jq
 
+# TRIGGER REPLAY WITH DATE
+kubectl exec <POD_NAME> -- wget -q -O - --no-check-certificate --method POST  --timeout=0 'http://localhost:8080/replay?startTime=11/10/2021&endTime=02/10/2022' | jq
+
 # KUBECTL PORT FORWARD
 kubectl port-forward deploy/<DEPLYMENT_NAME> 8090:8080
 
@@ -24,4 +27,41 @@ kubectl get secret <SERVICE_NAME>-ist-rabbitmq  -o yaml | grep uri | awk '{print
 # GET RABBIT SECRET USERNAME
 kubectl get secret <SERVICE_NAME>-ist-rabbitmq  -o yaml | grep username | awk '{print $2}' | base64 --decode
 
-# MISSING
+# GET CONTEXTS
+kubectl config get-contexts
+
+# CHANGE CONTEXT
+kubectl config use-context <CONTEXT_NAME>
+
+#################################################################################################################################
+#################################################################################################################################
+
+- TRIGGER REPLAY IN ATL
+kubectl exec integration-run-events-query-v2-7959db9dc9-cxhsp -- wget -q -O - --no-check-certificate --method POST  --timeout=0 'http://localhost:8080/replay?startTime=11/10/2021&endTime=02/10/2022' | jq
+
+- CHECK REPLAY STATUS ATL
+kubectl exec integration-run-events-query-v2-7959db9dc9-cxhsp -- wget -q -O - --no-check-certificate --method GET  --timeout=0 'http://localhost:8080/replay/status' | jq
+
+
+
+- TRIGGER REPLAY IN PLAS
+kubectl exec integration-run-events-query-v2-6c9b766c56-8rtvh -- wget -q -O - --no-check-certificate --method POST  --timeout=0 'http://localhost:8080/replay?startTime=11/10/2021&endTime=02/10/2022' | jq
+
+- CHECK REPLAY STATUS PALS
+kubectl exec integration-run-events-query-v2-6c9b766c56-8rtvh -- wget -q -O - --no-check-certificate --method GET  --timeout=0 'http://localhost:8080/replay/status' | jq
+
+
+
+- TRIGGER REPLAY IN TOR
+kubectl exec integration-run-events-query-v2-55db96b6f4-f84gg -- wget -q -O - --no-check-certificate --method POST  --timeout=0 'http://localhost:8080/replay?startTime=11/10/2021&endTime=02/10/2022' | jq
+
+- CHECK REPLAY STATUS TOR
+kubectl exec integration-run-events-query-v2-55db96b6f4-f84gg -- wget -q -O - --no-check-certificate --method GET  --timeout=0 'http://localhost:8080/replay/status' | jq
+
+
+
+- TRIGGER REPLAY IN DLAS
+kubectl exec integration-run-events-query-v2-5f49f95bd5-hmb2x -- wget -q -O - --no-check-certificate --method POST  --timeout=0 'http://localhost:8080/replay?startTime=11/10/2021&endTime=02/10/2022' | jq
+
+- CHECK REPLAY STATUS DLAS
+kubectl exec integration-run-events-query-v2-5f49f95bd5-hmb2x -- wget -q -O - --no-check-certificate --method GET  --timeout=0 'http://localhost:8080/replay/status' | jq
