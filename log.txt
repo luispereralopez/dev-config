@@ -507,3 +507,7 @@ Successfully copied cmds folder on 2022-01-25 17:59:31
 [2022-02-11 07:20:43] Successfully copied .zshrc file
 [2022-02-11 07:20:43] Successfully copied .p10k.zsh file
 [2022-02-11 07:20:43] Successfully copied cmds folder
+[2022-02-11 08:20:45] Starting script
+[2022-02-11 08:20:45] Successfully copied .zshrc file
+[2022-02-11 08:20:45] Successfully copied .p10k.zsh file
+[2022-02-11 08:20:45] Successfully copied cmds folder
