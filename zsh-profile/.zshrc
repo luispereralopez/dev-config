@@ -179,10 +179,10 @@ print-colors() {
 get-domainevents() {
   [ -z "$1" ] && echo "Missing mongo uri parameter" && echo "Usage: get-domainevents <mongo_uri> <service_name>" && return -1
   [ -z "$2" ] && echo "Missing servvice name parameter" && echo "Usage: get-domainevents <mongo_uri> <service_name>" && return -1
-  FILENAME="'$2'.domainevents.json"
+  FILENAME="~/ist/mongo-exports/$2.domainevents.json"
   mongoexport --uri="$1" --collection="domainevents" --out=$FILENAME
   echo "Successfully exported domainevents collection from dev to file: $FILENAME"
-  mongoimport --db="$2" --collection="domainevents" "'$2'.domainevents.json"
+  mongoimport --db="$2" --collection="domainevents" $FILENAME
   echo "Successfully imported $FILENAME to local collection '$2'"
 }
 
