@@ -170,19 +170,20 @@ print-colors() {
   for i in {0..255}; do print -Pn "%K{$i}  %k%F{$i}${(l:3::0:)i}%f " ${${(M)$((i%6)):#3}:+$'\n'}; done
 }
 
-mongodb://VD60Pcr4UpXj8cLC:K3l42xIMuQFmmUcc@replicaset-bdes-0.dlas1.ulti.io:27017,replicaset-bdes-1.dlas1.ulti.io:27017,replicaset-bdes-2.dlas1.ulti.io:27017/integration-run-status-cmd?authSource=integration-run-status-cmd&ssl=true&replicaSet=resp1
-MONGO_URI="mongodb://ad5f6786-53f4-4623-b86f-e3c406241130:6fdf26f5-b77e-40f2-8d41-1ae02ebd05d2@replicaset-bdes-0.mia.ulti.io:27017,replicaset-bdes-1.mia.ulti.io:27017,replicaset-bdes-2.mia.ulti.io:27017/df75adb0-d885-4e61-b023-400f007ee400?ssl=true"
-CMD_SERVICE_NAME="integrations-vendor-cmd"
-mongoexport --uri=$MONGO_URI --collection="domainevents" --out="$CMD_SERVICE_NAME.domainevents.json"
+# mongodb://VD60Pcr4UpXj8cLC:K3l42xIMuQFmmUcc@replicaset-bdes-0.dlas1.ulti.io:27017,replicaset-bdes-1.dlas1.ulti.io:27017,replicaset-bdes-2.dlas1.ulti.io:27017/integration-run-status-cmd?authSource=integration-run-status-cmd&ssl=true&replicaSet=resp1
+# MONGO_URI="mongodb://ad5f6786-53f4-4623-b86f-e3c406241130:6fdf26f5-b77e-40f2-8d41-1ae02ebd05d2@replicaset-bdes-0.mia.ulti.io:27017,replicaset-bdes-1.mia.ulti.io:27017,replicaset-bdes-2.mia.ulti.io:27017/df75adb0-d885-4e61-b023-400f007ee400?ssl=true"
+# CMD_SERVICE_NAME="integrations-vendor-cmd"
+# mongoexport --uri=$MONGO_URI --collection="domainevents" --out="$CMD_SERVICE_NAME.domainevents.json"
 
 # get domainevents from DEV env
 get-domainevents() {
   [ -z "$1" ] && echo "Missing mongo uri parameter" && echo "Usage: get-domainevents <mongo_uri> <service_name>" && return -1
   [ -z "$2" ] && echo "Missing servvice name parameter" && echo "Usage: get-domainevents <mongo_uri> <service_name>" && return -1
   FILENAME="'$2'.domainevents.json"
-  mongoexport --uri="$1" --collection="domainevents" --out=FILENAME
-  echo "Successfully exported domainevents collection to $FILENAME"
+  mongoexport --uri="$1" --collection="domainevents" --out=$FILENAME
+  echo "Successfully exported domainevents collection from dev to file: $FILENAME"
   mongoimport --db="$2" --collection="domainevents" "'$2'.domainevents.json"
+  echo "Successfully imported $FILENAME to local collection '$2'"
 }
 
 # KUBECTL FUNCTIONS
