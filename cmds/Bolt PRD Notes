@@ -1,0 +1,38 @@
+Dimensions side -> Integrtaion Quick Setup is clicked
+ - TIP Dashbaord is loaded in a new tab (no sign in required, somehow the token should retrieved and sent to TIP)
+ - TIP UI needs to be updated to receive the login params and skip the regular login flow
+ 	- Add Dimensions IDP to Dashboard
+ 	- Display company name if user comes from PRO -> DImensions
+ 	- Don't display company name if user comes from Dimensions only
+ 	- Populate username
+ 	- Schedule a meeting with Mark and Will to ask a few questions related to this
+ - Last Run and Status will be displayed for Joint Customer, for now it'll be blank unless Dimensions sends us the info
+ - Schedule column in the Dashboard for boomi integrations is not a cron expresion, UI needs to be updated to show the right value
+ 	- Q: How are we going to implement this? 
+ 	- A: 
+ - For 2c ask in the StandUp Teams chat (Question 1)
+ - Sign Out option in TIP shouldn’t be provided for the users coming from Dimensions
+ - For 5aa, we'll need to check schedule transfer field and if it's null/empty, proceed to delete the integration. If not, then display message from the PRD doc
+ - For 6a, we need to update change history ro include new trasnfer fields used in Boomi integrations
+ - Think about how to deploy metadata for the multiple Boomi templates given we're gonna have multiple DCs
+ - For 7e, further discussion is needed to know how it'll be implemented
+
+
+
+
+Questions:
+1. How do we know where the user came from before he/she was on Dimensions? (How do we know the user come from Pro -> Dimensions -> TIP Dashbaord or just Dimensions -> TIP Dashboard)
+	- Answer: Dimensions will add a query param so that dashboard knows the user is coming from Dimensions
+2. How does TIP know what IDP to use when coming from dimensions, given that dimensions is not our OPP authn identity provider
+3. For 2H, is it fair to assume "All the integrations" refers to all Boomi Integrations?
+4. What should TIP do about previously created integrations in Dimensions? TIP won't have that info unless there's some kind of migration
+5. For 4a, are you referring to Run in the TIP Dashboard main screen (kabab menu) or in the Scheduling Page (or both)?
+6. For 4a, is the second bulletpoint referring to last status and last run date?
+7. For 5a, we already display a confirmation message but with different text
+8. For 5aa, is there a way to delete a schedule for an integration in Dimensions? Because if it's not possible, how would the user delete an integration in the UI side?
+9. For 7d, what should we do for joint customers
+10. 
+
+
+
+This will permanently delete test scheduler rerun dates. Are you sure?

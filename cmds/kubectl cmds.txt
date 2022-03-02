@@ -33,6 +33,9 @@ kubectl config get-contexts
 # CHANGE CONTEXT
 kubectl config use-context <CONTEXT_NAME>
 
+# GET LOGGERS
+kubectl exec integration-run-events-query-v2-6c754d5fb-4blhx -- wget -q -O - --no-check-certificate --method POST  --timeout=0 'http://localhost:8080/actuator/loggers' | jq
+
 #################################################################################################################################
 #################################################################################################################################
 
