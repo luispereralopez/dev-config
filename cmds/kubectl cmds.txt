@@ -11,7 +11,7 @@ kubectl exec <POD_NAME> -- wget -q -O - --no-check-certificate --method GET  --t
 kubectl exec <POD_NAME> -- wget -q -O - --no-check-certificate --method POST  --timeout=0 'http://localhost:8080/replay' | jq
 
 # TRIGGER REPLAY WITH DATE
-kubectl exec <POD_NAME> -- wget -q -O - --no-check-certificate --method POST  --timeout=0 'http://localhost:8080/replay?startTime=11/10/2021&endTime=02/10/2022' | jq
+kubectl exec <POD_NAME> -- wget -q -O - --no-check-certificate --method POST  --timeout=0 'http://localhost:8080/replay?startTime=01/01/2022&endTime=02/10/2022' | jq
 
 # KUBECTL PORT FORWARD
 kubectl port-forward deploy/<DEPLYMENT_NAME> 8090:8080
@@ -40,31 +40,37 @@ kubectl exec integration-run-events-query-v2-6c754d5fb-4blhx -- wget -q -O - --n
 #################################################################################################################################
 
 - TRIGGER REPLAY IN ATL
-kubectl exec integration-run-events-query-v2-6c754d5fb-4blhx -- wget -q -O - --no-check-certificate --method POST  --timeout=0 'http://localhost:8080/replay?startTime=11/10/2021' | jq
+kubectl exec integration-run-events-query-v2-c495b4456-ldss7 -- wget -q -O - --no-check-certificate --method POST  --timeout=0 'http://localhost:8080/replay?startTime=01/01/2022' | jq
 
 - CHECK REPLAY STATUS ATL
-kubectl exec integration-run-events-query-v2-6c754d5fb-4blhx -- wget -q -O - --no-check-certificate --method GET  --timeout=0 'http://localhost:8080/replay/status' | jq
+kubectl exec integration-run-events-query-v2-c495b4456-ldss7 -- wget -q -O - --no-check-certificate --method GET  --timeout=0 'http://localhost:8080/replay/status' | jq
 
 
 
 - TRIGGER REPLAY IN PLAS
-kubectl exec integration-run-events-query-v2-7bdb67f7f9-b6rvq -- wget -q -O - --no-check-certificate --method POST  --timeout=0 'http://localhost:8080/replay?startTime=11/10/2021' | jq
+kubectl exec integration-run-events-query-v2-bfdf6cdb9-fkbbx -- wget -q -O - --no-check-certificate --method POST  --timeout=0 'http://localhost:8080/replay?startTime=01/01/2022' | jq
 
 - CHECK REPLAY STATUS PALS
-kubectl exec integration-run-events-query-v2-7bdb67f7f9-b6rvq -- wget -q -O - --no-check-certificate --method GET  --timeout=0 'http://localhost:8080/replay/status' | jq
+kubectl exec integration-run-events-query-v2-bfdf6cdb9-fkbbx -- wget -q -O - --no-check-certificate --method GET  --timeout=0 'http://localhost:8080/replay/status' | jq
 
 
 
 - TRIGGER REPLAY IN TOR
-kubectl exec integration-run-events-query-v2-565fdc74f7-2qrps -- wget -q -O - --no-check-certificate --method POST  --timeout=0 'http://localhost:8080/replay?startTime=11/10/2021' | jq
+kubectl exec integration-run-events-query-v2-b9d7bccdc-bpl5s -- wget -q -O - --no-check-certificate --method POST  --timeout=0 'http://localhost:8080/replay?startTime=01/01/2022' | jq
 
 - CHECK REPLAY STATUS TOR
-kubectl exec integration-run-events-query-v2-565fdc74f7-2qrps -- wget -q -O - --no-check-certificate --method GET  --timeout=0 'http://localhost:8080/replay/status' | jq
+kubectl exec integration-run-events-query-v2-b9d7bccdc-bpl5s -- wget -q -O - --no-check-certificate --method GET  --timeout=0 'http://localhost:8080/replay/status' | jq
 
 
 
 - TRIGGER REPLAY IN DLAS
-kubectl exec integration-run-events-query-v2-5f57dcd654-bzk2v -- wget -q -O - --no-check-certificate --method POST  --timeout=0 'http://localhost:8080/replay?startTime=11/10/2021' | jq
+kubectl exec integration-run-events-query-v2-5f57dcd654-bzk2v -- wget -q -O - --no-check-certificate --method POST  --timeout=0 'http://localhost:8080/replay?startTime=01/01/2022' | jq
 
 - CHECK REPLAY STATUS DLAS
 kubectl exec integration-run-events-query-v2-5f57dcd654-bzk2v -- wget -q -O - --no-check-certificate --method GET  --timeout=0 'http://localhost:8080/replay/status' | jq
+
+#################################################################################################################################
+#################################################################################################################################
+
+mongo "`kubectl get secret integration-run-status-cmd-ist-mongodb  -o yaml | grep uri | awk '{print $2}' | base64 --decode`"
+db.getCollection('domainevents').find({}).count()
