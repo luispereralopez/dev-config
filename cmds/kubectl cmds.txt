@@ -20,7 +20,6 @@ kubectl port-forward deploy/<DEPLYMENT_NAME> 8090:8080
 # for GCP, `pri` substring should be removed from the connection string returned
 kubectl get secret <SERVICE_NAME>-ist-mongodb  -o yaml | grep uri | awk '{print $2}' | base64 --decode
 
-
 # GET RABBIT SECRET URI
 kubectl get secret <SERVICE_NAME>-ist-rabbitmq  -o yaml | grep uri | awk '{print $2}' | base64 --decode
 
