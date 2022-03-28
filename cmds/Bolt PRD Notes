@@ -16,8 +16,10 @@ Dimensions side -> Integrtaion Quick Setup is clicked
  - For 6a, we need to update change history ro include new trasnfer fields used in Boomi integrations
  - Think about how to deploy metadata for the multiple Boomi templates given we're gonna have multiple DCs
  - For 7e, further discussion is needed to know how it'll be implemented
-
-
+ - We dont support links in static page entries, pending question to review in the PRD
+ - Need to implement radio buttons in static page entry
+ - Need to check if there's a security implication of stringify the CRT csv file uploaded in the client side (stringified version of csv will be sent to the BE to be uploaded to Boomi later)
+ - 
 
 
 Questions:
@@ -31,8 +33,41 @@ Questions:
 7. For 5a, we already display a confirmation message but with different text
 8. For 5aa, is there a way to delete a schedule for an integration in Dimensions? Because if it's not possible, how would the user delete an integration in the UI side?
 9. For 7d, what should we do for joint customers
-10. 
+10. Don't understand 8b
 
+- Do CRTs depend on Parameters? Also, if we're going to PRD needs to be updated to reflect the parameters that will be used in metadata for CRTs and GP.
+- Sync attach/install iPack and create CRTs in Boomi, and load GP when successfull
+
+	
 
 
 This will permanently delete test scheduler rerun dates. Are you sure?
+
+
+ToDo Flows:
+- Flow to take into account different integrations sharing the same boomi env
+    - reach out to boomi to pull common info for each fileTypeId
+- SFTP details retrieval from Dimensions (taken into account password should not be displayed and it'll be encrypted)
+- File template download (should it be included in the metadata? need to verify the template file)
+- Auth Flow (entitlements)
+
+
+NEW QUESTIONS:
+- Are sftp connections for a given template shared among all templates?
+  A: one template associated to one connection
+- How are we going to determine entitlements for Dimensions only and joint customers? How are these entitlements/permissions going to be added to users? 
+  A: Pending (Niranjan said validate access token can return some user info we can use to determine TIP entitlements)
+- Are Joint customers supposed to see different dashboards if the come from different sources? (sources: from dimensions or usual TIP login)
+  A: yes
+
+- Is template from the Overview page small enough to include it in the metadata?
+- Same template, mutlitple integrations, what's the point if they are gonna share the same fields?
+- Is Test Configuration going to be present in the Setup step?
+
+
+
+
+
+
+
+
