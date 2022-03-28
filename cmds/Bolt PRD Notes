@@ -60,9 +60,31 @@ NEW QUESTIONS:
 - Are Joint customers supposed to see different dashboards if the come from different sources? (sources: from dimensions or usual TIP login)
   A: yes
 
+
+for Dimensions:
 - Is template from the Overview page small enough to include it in the metadata?
+  A: Not big, can be included in the metadata (name of the csv file to be donwloaded TBD)
 - Same template, mutlitple integrations, what's the point if they are gonna share the same fields?
 - Is Test Configuration going to be present in the Setup step?
+  A: yes
+- Just for verification, is TIP pulling SFTP from dimensions? If so, we also need to keep track of what SFTP was selected during GP by calling to boomi once the Setup Page was loaded (two calls will happen at this point)
+  A: Dimensions will return the SFTP connection slected when retrieving the list of SFTP connections 
+- Is there an endpoint in Dimensions already to get AccountId and EnvironmentId?
+  A: Will be created
+
+
+for TIP:
+- boomi-dimensions-setup-worker needs to reach out to TMS using tms-helper-library. Given vanity url, client id, client secret, etc. are going to be returned by TMS, we should probably enhance the tms-helper-lib ?
+
+
+
+
+
+
+
+
+
+
 
 
 
