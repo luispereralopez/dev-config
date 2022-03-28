@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd /Users/luisp/ist/projects/dev-config
+cd /Users/luisp/ist/dev-config
 git checkout master
 git pull
 
