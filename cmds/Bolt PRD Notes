@@ -71,10 +71,26 @@ for Dimensions:
   A: Dimensions will return the SFTP connection slected when retrieving the list of SFTP connections 
 - Is there an endpoint in Dimensions already to get AccountId and EnvironmentId?
   A: Will be created
+- Do we also need to install the ipack instance when installing the ipack?
+  A: Yes
+- Where are we going to store creds for Dimensions API tenants if TMS can't store sensitive data?
+  A: Vault
+- Get AccId and EnvId contract from Niranjan
+  A: Under construction
 
 
 for TIP:
 - boomi-dimensions-setup-worker needs to reach out to TMS using tms-helper-library. Given vanity url, client id, client secret, etc. are going to be returned by TMS, we should probably enhance the tms-helper-lib ?
+
+
+To Do for development:
+- Add dimensions fields to TMS (tenantId, vanityUrl, solutionId, apiGatewayUrl?, stackId, tenantShortName)
+- Setup Vault (any path for now until we get a definitive path with new certs, we need to meet with security and TMS teams)
+- Verify we can retrieve PRO tenantId from session
+- Verify gateway can convert SAML token t
+- Verify Time.WorkforceDimensions.Web
+
+
 
 
 
