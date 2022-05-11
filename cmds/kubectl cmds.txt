@@ -71,5 +71,10 @@ kubectl exec integration-run-events-query-v2-5f57dcd654-bzk2v -- wget -q -O - --
 #################################################################################################################################
 #################################################################################################################################
 
-mongo "`kubectl get secret integration-run-status-cmd-ist-mongodb  -o yaml | grep uri | awk '{print $2}' | base64 --decode`"
+mongo `kubectl get secret integration-run-status-cmd-ist-mongodb  -o yaml | grep uri | awk '{print $2}' | base64 --decode`
 db.getCollection('domainevents').find({}).count()
+
+kubectl get secret cmp-integration-adapter-uat-ist-mongodb  -o yaml | grep uri | awk '{print $2}' | base64 --decode
+
+kubectl exec -it cmp-integration-adapter-uat-bd577d649-52d62 -- /bin/sh
+

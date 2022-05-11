@@ -77,22 +77,59 @@ for Dimensions:
   A: Vault
 - Get AccId and EnvId contract from Niranjan
   A: Under construction
-
+- Can files be selectable in the file picker for sending the info to boomi/dimensions?
+  A: 
 
 for TIP:
 - boomi-dimensions-setup-worker needs to reach out to TMS using tms-helper-library. Given vanity url, client id, client secret, etc. are going to be returned by TMS, we should probably enhance the tms-helper-lib ?
 
 
+TMS Meeting Notes regarding new fields to be added to extension:
+- TMS has a lot on the plate
+- TMS new version should be released on September, but depending on requests, it might be pushed to a later date
+- Adding extensions and fields in the new version is easier than current version
+- We requested if it's possible to add this only for the dev env for development process and TMS prod will meet with TMS developers Friday next week to get an idea of the effort for this.
+- New TMS version extensions is not backwards compatible with current version, meaning if we want to use new version we would need to update our code
+- Next step for us would be:
+  - discuss if we actually need the other fields given that we only need vanity url, and that field will be added as a service instance, not to the extension (in the extension we already have the dimensions tenantId). If we only add vanity url in a service instance, it would remove the dependency we have with TMS.
+  - If we decide we want to proceed with the addition of all fields in the quip doc (https://ukg.quip.com/N4keAMr2duE3/New-Fields-in-TMS-draft) for dev and prod envs, Kim Alonso suggested to reach out to Kevin Florez from provisioning because they need to be aware of the manual process of adding values to those fields (they won't be happy with it given they are trying to remove as much manual process as needed, according to Kim)
+  - I'll follow up next week with Kim regarding the meeting they'll have with TMS devs
+
 To Do for development:
 - Add dimensions fields to TMS (tenantId, vanityUrl, solutionId, apiGatewayUrl?, stackId, tenantShortName)
+    -> We won't add anything to the extensions, just vanityUrla ad apiGatewayUrl to the service instances
 - Setup Vault (any path for now until we get a definitive path with new certs, we need to meet with security and TMS teams)
 - Verify we can retrieve PRO tenantId from session
-- Verify gateway can convert SAML token t
+- Verify gateway can convert SAML token to
 - Verify Time.WorkforceDimensions.Web
 
+############################################################################################################
+
+TO KEEP IN MIND FOR FUTURE ITERATIONS
+
+For Hyperfind:
+ - default value will need to be added to the metadata GP and will not be used in the UI but in the backend to send the create flacon process request. transfer field name maybe: dimensions_defaultHyperfindValue
+ - selected value will be stored in transfer field dimensions_selectedHyperfindValue and it will be overriden during GP. This value will be used when running the falcon process
+
+For scheduling:
+- Updating a schedule uses a different API call, when sending a request to run and integration based on a schedule, a schedule id is returned, we need to add that schedule id to the integrationId -> falconProcessId mapping.
+
+For CRT:
+ - when uploading new CRT file, we need to evict the CRT data in Dimensions
+
+Should we consider making boomi-data-proxy a library
+- yes (discuss tomorrow)
+
+Ask if we're going to either have scheduler to run integrations after clicking Finish or having an extra step to show a dialog with all file status (run won't be enabled until all files are successfully scanned)
+
+Where can we see updated mocks for error details page? 
+Is the PRD going to be updated?
 
 
+Schedule doesnt depend on files, it can be sent to Dimensions before the files are ready
 
+For notifications via email, does Dimensions API accept email so they can notify users of the integration status?
+############################################################################################################
 
 
 
