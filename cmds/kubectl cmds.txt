@@ -78,3 +78,6 @@ kubectl get secret cmp-integration-adapter-uat-ist-mongodb  -o yaml | grep uri |
 
 kubectl exec -it cmp-integration-adapter-uat-bd577d649-52d62 -- /bin/sh
 
+
+kubectl get secret ded-integration-adapter-ist-mongodb  -o yaml | grep uri | awk '{print $2}' | base64 --decode
+
