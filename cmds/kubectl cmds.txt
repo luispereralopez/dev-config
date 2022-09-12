@@ -4,6 +4,9 @@ kubectl exec -it <POD_NAME>  -- /bin/sh
 # SH INTO A POD WITH MULTIPLE CONTAINERS
 kubectl exec -it <POD_NAME> -c <CONTAINER_NAME> -- /bin/sh
 
+# GET LOGS FROM POD
+kubectl logs <POD_NAME> -c <CONTAINER_NAME>
+
 # CHECK REPLAY STATUS
 kubectl exec <POD_NAME> -- wget -q -O - --no-check-certificate --method GET  --timeout=0 'http://localhost:8080/replay/status' | jq
 
@@ -52,7 +55,8 @@ kubectl exec integration-run-events-query-v2-6c649b99cb-brtfk -- wget -q -O - --
 - CHECK REPLAY STATUS PALS
 kubectl exec integration-run-events-query-v2-6c649b99cb-brtfk -- wget -q -O - --no-check-certificate --method GET  --timeout=0 'http://localhost:8080/replay/status' | jq
 
-
+- GET ENV VARS FOR POD
+kubectl exec <POD_NAME> -- env
 
 - TRIGGER REPLAY IN TOR
 kubectl exec integration-run-events-query-v2-84f57b98bb-lk6zx -- wget -q -O - --no-check-certificate --method POST  --timeout=0 'http://localhost:8080/replay?startTime=01/22/2022' | jq
@@ -74,7 +78,7 @@ kubectl exec integration-run-events-query-v2-5f57dcd654-bzk2v -- wget -q -O - --
 mongo `kubectl get secret integration-run-status-cmd-ist-mongodb  -o yaml | grep uri | awk '{print $2}' | base64 --decode`
 db.getCollection('domainevents').find({}).count()
 
-kubectl get secret cmp-integration-adapter-uat-ist-mongodb  -o yaml | grep uri | awk '{print $2}' | base64 --decode
+kubectl get secret integration-virus-scan-worker-ist-mongodb  -o yaml | grep uri | awk '{print $2}' | base64 --decode
 
 kubectl exec -it cmp-integration-adapter-uat-bd577d649-52d62 -- /bin/sh
 
