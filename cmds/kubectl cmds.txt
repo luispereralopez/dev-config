@@ -74,6 +74,7 @@ kubectl exec integration-run-events-query-v2-5f57dcd654-bzk2v -- wget -q -O - --
 
 #################################################################################################################################
 #################################################################################################################################
+kubectl exec -it integration-import-sftp-server-6fc9b7dff6-5kb2n -c integration-import-sftp-server -- /bin/sh 
 
 mongo `kubectl get secret integration-run-status-cmd-ist-mongodb  -o yaml | grep uri | awk '{print $2}' | base64 --decode`
 db.getCollection('domainevents').find({}).count()
@@ -86,3 +87,5 @@ kubectl exec -it cmp-integration-adapter-uat-bd577d649-52d62 -- /bin/sh
 kubectl get secret ded-integration-adapter-ist-mongodb  -o yaml | grep uri | awk '{print $2}' | base64 --decode
 
 kubectl get secret integration-continuation-worker-ist-rabbitmq  -o yaml | grep uri | awk '{print $2}' | base64 --decode
+
+k logs integration-virus-scan-worker-6b4b4895bd-dxh7s | grep ERROR | grep '^\{' |  jq .uslog.message
