@@ -79,6 +79,16 @@ for Dimensions:
   A: Under construction
 - Can files be selectable in the file picker for sending the info to boomi/dimensions?
   A: 
+- Q: For notifications via email, does Dimensions API accept email so they can notify users of the integration status?
+  A:
+- Q: Ask if we're going to either have scheduler to run integrations after clicking Finish or having an extra step to show a dialog with all file status (run won't be enabled until all files are successfully scanned)
+  A: When user clicks finish, we're going to emit usual integration updated event, which is going to trigger
+     1. Create falcon process (Update SFTP connection in Dimensions)
+     2. Create schedule for the falcon process if schedule was selected
+     3. 
+- Q: In the MLD, for SFTP test connection, will the API only return 200s and 500s? What about 401?
+  A:
+- Missing response from GET SFTP connections request
 
 for TIP:
 - boomi-dimensions-setup-worker needs to reach out to TMS using tms-helper-library. Given vanity url, client id, client secret, etc. are going to be returned by TMS, we should probably enhance the tms-helper-lib ?
@@ -120,16 +130,14 @@ For CRT:
 Should we consider making boomi-data-proxy a library
 - yes (discuss tomorrow)
 
-Ask if we're going to either have scheduler to run integrations after clicking Finish or having an extra step to show a dialog with all file status (run won't be enabled until all files are successfully scanned)
-
-Where can we see updated mocks for error details page? 
-Is the PRD going to be updated?
-
-
 Schedule doesnt depend on files, it can be sent to Dimensions before the files are ready
-
-For notifications via email, does Dimensions API accept email so they can notify users of the integration status?
 ############################################################################################################
+
+Should we remove dimensions-data-proxy?
+
+"connection": {                 //optional
+  "connectionIdentfier" : 1
+}
 
 
 
