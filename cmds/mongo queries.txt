@@ -307,3 +307,35 @@ db.getCollection('guided-process-metadatas').find({
 
 ######################################################################################################################
 ######################################################################################################################
+
+Update insertMany
+
+db.getCollection('integration-details').updateMany(
+  {
+    "fileTypeId": {$nin: [/^usg.dimension/]},
+    "boomiFailed": {$ne: null}
+  },
+  { $unset: {boomiFailed: ""} }
+)
+
+######################################################################################################################
+######################################################################################################################
+
+Get domainevents from vendor-file-type-config-cmd with aggregate function
+
+db.getCollection('domainevents').aggregate([
+  { $match: {"aggregateIdentifier": {$ne: "usg.tasc.ct"}} },
+  { $project: {"aggregateIdentifier": 1, "timestamp": 1, "firstTimestamp": 1, "lastTimestamp": 1, _id: 0} },
+  { $group: {_id: "$aggregateIdentifier", count: {$sum: 1},  times: {$push: {"timestamp": "$timestamp"}}}},
+//   { $sort: {count: -1}},
+  { $unwind: "$times"},
+//   { $addFields: {"time": "$times.timestamp"} },
+//   { $project: {"_id": 1, "count": 1, "time": 1} },
+  { $sort: {"times.timestamp": -1}},
+  
+//   { $project: {"status": 1} }
+])
+)
+
+######################################################################################################################
+######################################################################################################################
