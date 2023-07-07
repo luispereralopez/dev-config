@@ -43,6 +43,7 @@ kubectl exec integration-run-events-query-v2-6c754d5fb-4blhx -- wget -q -O - --n
 
 - TRIGGER REPLAY IN ATL
 kubectl exec integration-run-events-query-v2-54968769f7-6kf5q -- wget -q -O - --no-check-certificate --method POST  --timeout=0 'http://localhost:8080/replay?startTime=03/17/2022' | jq
+kubectl exec integration-run-events-query-v2-54968769f7-6kf5q -- wget -q -O - --no-check-certificate --method POST  --timeout=0 'http://localhost:8080/replay' | jq
 
 - CHECK REPLAY STATUS ATL
 kubectl exec integration-run-events-query-v2-54968769f7-6kf5q -- wget -q -O - --no-check-certificate --method GET  --timeout=0 'http://localhost:8080/replay/status' | jq
@@ -91,3 +92,11 @@ kubectl get secret integration-continuation-worker-ist-rabbitmq  -o yaml | grep 
 k logs integration-virus-scan-worker-6b4b4895bd-dxh7s | grep ERROR | grep '^\{' |  jq .uslog.message
 
 kubectl get secret integrations-vendor-cmd-ist-mongodb  -o yaml | grep uri | awk '{print $2}' | base64 --decode
+kubectl get secret ist-event-batching-worker-ist-mongodb  -o yaml | grep uri | awk '{print $2}' | base64 --decode
+
+
+
+kubectl exec integration-scheduler-5f98f54fcf-9fp6t -- wget -q -O - --no-check-certificate --method GET  --timeout=0 'http://localhost:8080/replay/status' | jq
+kubectl exec integration-scheduler-5f98f54fcf-9fp6t -- wget -q -O - --no-check-certificate --method POST  --timeout=0 'http://localhost:8080/replay' | jq
+
+kubectl get secret integration-import-sftp-server-ist-mongodb  -o yaml | grep uri | awk '{print $2}' | base64 --decode

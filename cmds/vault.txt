@@ -1,0 +1,6 @@
+https://vault.p.us-east1.prod.gcp.int:8200/v1/auth/cert/login
+https://vault-p-dc.atl.ucloud.int:8200/v1/auth/cert/login
+
+curl -kv --request POST --cert vault_bdes-decoded.crt --key vault_bdes-decoded.key --data '{}' https://vault-p-dc.atl.ucloud.int:8200/v1/auth/cert/login | jq .auth.client_token
+
+curl -kv --location 'https://vault-p-dc.atl.ucloud.int:8200/v1/secret/bdes/secret/carrier-global-connections' --header 'Content-Type: application/json' --header 'X-Vault-Token: '$TOKEN'' | jq .
